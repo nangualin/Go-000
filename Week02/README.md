@@ -3,6 +3,7 @@
 目录中有个sql语句。是创建本例中的表。标准的按照以下目录结构组织。真实模拟了sql.ErrNoRows的场景，想做的比较完整，但由于时间有限，家里有事，有些东西还没补充完整。后面我再完善的。
 这种学习方法可以一下子知道许多东西。只是碍于时间不够用。
 
+```
 main.go
 src
   article
@@ -10,7 +11,7 @@ src
         ArticleController.go
         ArticleDao.go
         ArticleService.go
-
+```
 
 
 #作业问题
