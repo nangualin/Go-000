@@ -17,7 +17,7 @@ var (
 // 开启连接
 func openConn() (err error){
 	// 此处请使用对应的账户密码
-	db , err = sql.Open("mysql","root:xjc.123@tcp(10.122.149.201:3306)/test?charset=utf8")
+	db , err = sql.Open("mysql","root:xxx@tcp(localhost:3306)/test?charset=utf8")
 	if err != nil {
 		fmt.Println("数据库链接错误,", err)
 		return
