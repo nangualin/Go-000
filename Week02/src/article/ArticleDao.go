@@ -55,8 +55,12 @@ func query ( querySql string,id string) (*Article ,error) {
 	err := openConn()
 	article := new(Article)
 	err = db.QueryRow(querySql,id).Scan(&article.Id,&article.Title,&article.Content,&article.Created,&article.Updated)
-	if err == sql.ErrNoRows {
-		// fmt.Println("数据库链接错误:",err)
+	if err != nil {
+		if errors.Is(err,sql.ErrNoRows) {
+			return nil,errors.New("query aritcle errors :" + sql.ErrNoRows.Error())
+			// 非严格校验场景直接关闭错误。return 以下结果
+			// return nil,nil
+		}
 		return nil,errors.Wrapf(err,"数据库访问失败")
 	}
 	return article,err
