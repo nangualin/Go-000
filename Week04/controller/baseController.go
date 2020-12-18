@@ -2,17 +2,13 @@ package controller
 
 import (
 	"context"
-	"encoding/json"
-	"errors"
 	"net/http"
-	"os"
 	"github.com/gorilla/mux"
-	"github.com/go-kit/kit/log"
-	"service"
+	"Week04/service"
 )
 
-func httpHandler(ctx context.Context,userService service.userService) Http.handler {
-    r : mux.NewRouter()
-    r.Methods("GET").Path('/info').Handler(userService.getUserInfo)
+func HttpHandler(ctx context.Context,userService service.UserService) http.Handler {
+    r := mux.NewRouter()
+    r.HandleFunc("/info",userService.GetUserInfo)
     return r
 }

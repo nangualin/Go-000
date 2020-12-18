@@ -1,4 +1,4 @@
-// +build wireinject
+//+build wireinject
 
 package main
 
@@ -7,11 +7,11 @@ import (
     "github.com/gorilla/mux"
     "context"
     "net/http"
-    "service"
-
+    "Week04/service"
+    "Week04/controller"
 )
 
-func InitHttpHandler(msg String ,ctx context.Context) http.Handler {
-    wire.Build(service.userService,controller.httpHandler)
+func InitHttpHandler(msg string ,ctx context.Context) http.Handler {
+    wire.Build(service.UserServiceFun,controller.HttpHandler)
     return &mux.Router{}
 }
