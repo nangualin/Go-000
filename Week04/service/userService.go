@@ -2,9 +2,8 @@ package service
 
 import (
     "errors"
-    "fmt"
     "log"
-    "net/http"
+    "context"
 )
 type UserInfoDTO struct {
    ID int64
@@ -17,7 +16,9 @@ var (
 )
 
 type UserService interface {
-  GetUserInfo(w http.ResponseWriter, _ *http.Request)
+
+  getUserInfo(ctx context.Context,userName,password string) (*UserInfoDTO ,error)
+
 }
 type UserServiceImpl struct {
    message string
@@ -28,8 +29,9 @@ func UserServiceFun(msg string) UserService {
     message:msg,
   }
 }
+func (userService *UserServiceImpl) getUserInfo(ctx context.Context,userName,password string) (*UserInfoDTO ,error) {
+  err := ErrUserNotExisted
+  log.Printf("err: %s", userService.message)
+  return &UserInfoDTO{1,userName,12} ,err
 
-func (userService *UserServiceImpl) GetUserInfo(w http.ResponseWriter, r *http.Request) {
-  log.Printf("msg: %s", userService.message)
-  fmt.Println("yes,you come in")
 }
