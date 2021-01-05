@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27b2620a-027d-4b74-9234-44732987bae5" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Week04/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Week04/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Week04/service/userService.go" beforeDir="false" afterPath="$PROJECT_DIR$/Week04/service/userService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Week06/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Week06/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Week06/main1.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -343,6 +344,22 @@
         <entry key="GOPROXY" value="https://goproxy.cn,https://goproxy.io,direct" />
       </map>
     </environment>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/Week06/main.go</url>
+          <line>195</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/Week06/main.go</url>
+          <line>194</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Week04/controller/baseController.go">

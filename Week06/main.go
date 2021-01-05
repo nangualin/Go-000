@@ -2,7 +2,10 @@ package main
 
 // 导入所需包
 import (
+	"context"
 	"fmt"
+	"golang.org/x/sync/errgroup"
+	"math/rand"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -51,7 +54,7 @@ func (sldwindow *SlidingWindow) getCurrentBucket() *bucket {
 	sldwindow.mux.Lock()
 	defer sldwindow.mux.Unlock()
 	currentSecondTime := time.Now().Unix()
-	if len(sldwindow.buckets) == 0 {
+	if sldwindow.tail == 0 && sldwindow.buckets[sldwindow.tail] == nil {
 		// 确保该tail是0
 		sldwindow.tail = 0
 		sldwindow.buckets[sldwindow.tail] = &bucket{
@@ -72,11 +75,14 @@ func (sldwindow *SlidingWindow) getCurrentBucket() *bucket {
 		if int64(tail.windowStart+sldwindow.buckWidth) > currentSecondTime {
 			return tail
 		} else if (currentSecondTime - int64((tail.windowStart + sldwindow.buckWidth))) > int64(sldwindow.width*sldwindow.buckWidth) {
-			// 如果是长时间没放完，又有了新的访问。导致这些窗口内的桶都过期了。
+			// 如果是长时间没访问，又有了新的访问。导致这些窗口内的桶都过期了。
 			// 因此就需要重置一下桶。
 			sldwindow.tail = 0
 			sldwindow.buckets = make([]*bucket, sldwindow.width)
-			return sldwindow.buckets[sldwindow.tail]
+			return &bucket{
+				baseBucket: baseBucket{},
+				windowStart: int32(currentSecondTime),
+			}
 		} else {
 			sldwindow.tail++
 			bucket := &bucket{
@@ -126,15 +132,75 @@ func (sldwindow *SlidingWindow) incrReject() {
 }
 
 func main() {
-	// 滑动窗口计数器
-	// 用于给熔断器提供数据依据
-	rw := NewSlidingWindow(2, 1)
+	group ,_ := errgroup.WithContext(context.Background())
+
+	rw := NewSlidingWindow(20, 1)
 	fmt.Println(time.Now().Unix())
+	group.Go(
+		func() error {
+			rand.Seed(time.Now().UnixNano())
+			num := rand.Intn(1000)
+			println("number is: %s",num)
+			for i := 0; i<num ;i++ {
+				rw.incrSuccess()
+				time.Sleep(time.Millisecond * 30)
+			}
+		    return nil
+	    },
+	)
+	group.Go(
+		func() error {
+			rand.Seed(time.Now().UnixNano())
+			num := rand.Intn(333)
+			println("number is: %s",num)
+			for i := 0; i<num ;i++ {
+				rw.incFail()
+				time.Sleep(time.Millisecond * 30)
+			}
 
-	//test 2
-	rw.incrSuccess()
-	time.Sleep(time.Second * 3)
-	rw.incrSuccess()
-	fmt.Printf("%+v,%+v\n", rw.buckets[0], rw.buckets[1])
+			return nil
+		},
+	)
+	group.Go(
+		func() error {
+			rand.Seed(time.Now().UnixNano())
+			num := rand.Intn(222)
+			println("number is: %s",num)
+			for i := 0; i<num ;i++ {
+				rw.incrTimeOut()
+				time.Sleep(time.Millisecond * 30)
+			}
 
+			return nil
+		},
+	)
+	group.Go(
+		func() error {
+			rand.Seed(time.Now().UnixNano())
+			num := rand.Intn(111)
+			println("number is: %s",num)
+			for i := 0; i<num ;i++ {
+				rw.incrReject()
+				time.Sleep(time.Millisecond * 30)
+			}
+
+			return nil
+		},
+	)
+
+
+	if err := group.Wait() ;err != nil {
+		fmt.Println("something has error",err)
+	}else{
+		stat := baseBucket{}
+		for _,bucket:= range rw.buckets {
+			if bucket !=nil {
+				stat.success += bucket.baseBucket.success
+				stat.fail += bucket.baseBucket.fail
+				stat.timeout += bucket.baseBucket.timeout
+				stat.rejection += bucket.baseBucket.rejection
+			}
+		}
+		fmt.Printf("打印统计结果 %v \n",stat)
+	}
 }
