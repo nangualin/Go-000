@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27b2620a-027d-4b74-9234-44732987bae5" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Week06/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Week06/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Week09/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Week09/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Week09/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +222,7 @@
       <recent name="D:\work\GO\Go-000" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build Week04/Week06">
+  <component name="RunManager" selected="Go Build.go build main.go">
     <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
       <PhpTestRunnerSettings />
       <method />
@@ -265,11 +267,29 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="go build Week04/Week09" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Go-000" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/Week09/main.go" />
+      <package value="Week04/Week09" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build main.go wire_gen.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="Go-000" />
       <working_directory value="$PROJECT_DIR$/Week04" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/Week04/main.go|$PROJECT_DIR$/Week04/wire_gen.go" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Go-000" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/Week09/main.go" />
+      <package value="Week04" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
@@ -284,6 +304,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build main.go" />
+        <item itemvalue="Go Build.go build Week04/Week09" />
         <item itemvalue="Go Build.go build Week04/Week06" />
       </list>
     </recent_temporary>
@@ -355,6 +377,16 @@
           <url>file://$PROJECT_DIR$/Week06/main.go</url>
           <line>194</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/Week09/main.go</url>
+          <line>92</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/Week09/main.go</url>
+          <line>93</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
